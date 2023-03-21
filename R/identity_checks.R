@@ -17,8 +17,11 @@ snp_check = function(current_sample, idtable){
   
   if(snp_seen_before){
     snp_and_ID = subset(idtable, sample_SNP == current_sample$sample_SNP)
-    colnames(snp_and_ID) = paste0(colnames(snp_and_ID), "_in_db")
-    snp_and_ID = cbind(current_sample, snp_and_ID)
+    snp_and_ID = dplyr::rename(snp_and_ID, PCR.ID = `PCR ID`)
+    snp_and_ID$reference = 'in database'
+    current_sample$reference = 'new sample'
+    snp_and_ID = dplyr::bind_rows(current_sample, snp_and_ID)
+    snp_and_ID = dplyr::relocate(snp_and_ID, orig, .after = last_col())
     return(snp_and_ID)
   }else{
     return(current_sample)
