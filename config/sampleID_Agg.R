@@ -1,25 +1,25 @@
 ## Script to aggregate sample ID info
 
-source('establish_con.R')
+#source('establish_con.R')
+#dbDisconnect(con)
 
 
-
-identity_extracts("W094b_B2022.617_v1 : M-YTAYAGAW")
 
 
 ##### 
 library(optparse)
+
 option_list = list(
   make_option(c("-f", "--file"), type="character", default=NULL,
               help="sampleID.txt filepath", metavar="character"))
 
 opt_parser = OptionParser(option_list=option_list);
 opt = parse_args(opt_parser)
-sampleID=sample_info_extract(opt$file)
+#sampleID=sample_info_extract(opt$file)
 sampleidnum = sampleID$Nummer
 sampleidpcr= sampleID$`PCR ID`
-sampleID = dplyr::left_join(sampleID, con_tbl, by = "PCR ID")
-dbDisconnect(con)
+#sampleID = dplyr::left_join(sampleID, con_tbl, by = "PCR ID")
+
 
 
 ### Check if sampleSNP with that PatientID is already present
