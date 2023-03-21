@@ -4,8 +4,6 @@
 #dbDisconnect(con)
 
 
-
-
 ##### 
 library(optparse)
 
