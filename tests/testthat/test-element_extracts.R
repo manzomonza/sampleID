@@ -1,12 +1,11 @@
-
-inputs = c('W990_B2022.13909I_v1 : F-TKRYGSRW',
-                'W1073b_Pool1_B2022.16857_v1 : F-TKATRGAT',
+inputs = c('W990_B2022.13909I_v1 : ?-TKRYGSRW',
+                'W1073b_Pool1_B2022.16857_v1 : N-TKATRGAT',
                 'W1587_B2022.24795_v1 : M-YKRCGCAW')
 
-outputs = list(one = list(snp = "F-TKRYGSRW",
+outputs = list(one = list(snp = "?-TKRYGSRW",
                           id = 'W990',
                           nummer = 'B2022.13909'),
-               two = list(snp = "F-TKATRGAT",
+               two = list(snp = "N-TKATRGAT",
                           id = 'W1073',
                           nummer = 'B2022.16857'),
                three = list(snp = "M-YKRCGCAW",
@@ -14,7 +13,6 @@ outputs = list(one = list(snp = "F-TKRYGSRW",
                     nummer = 'B2022.24795'))
 
 
-#lapply(inputs,element_extracts)
 
 
 for(i in seq_along(inputs)){

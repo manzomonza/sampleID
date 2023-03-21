@@ -21,7 +21,7 @@ sampleidpcr= sampleID$`PCR ID`
 
 
 ### Check if sampleSNP with that PatientID is already present
-sampleID_path = "SampleID_table.tsv"
+sampleID_path = "./inputs/SampleID_table.tsv"
 # sampleID_path = "/mnt/NGS_Diagnostik/sample_ID/SampleID_table.tsv"
 
 idtable = readr::read_tsv(sampleID_path)

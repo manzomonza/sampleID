@@ -10,8 +10,19 @@
 #'
 #' @examples
 snp_check = function(current_sample, idtable){
-  snp_and_ID = subset(idtable, sample_SNP == current_sample$sample_SNP)
-  return(snp_and_ID)
+  if(current_sample$sample_SNP == "N/A"){
+    return(current_sample)
+  }
+  snp_seen_before =  current_sample$sample_SNP %in% idtable$sample_SNP
+  
+  if(snp_seen_before){
+    snp_and_ID = subset(idtable, sample_SNP == current_sample$sample_SNP)
+    colnames(snp_and_ID) = paste0(colnames(snp_and_ID), "_in_db")
+    snp_and_ID = cbind(current_sample, snp_and_ID)
+    return(snp_and_ID)
+  }else{
+    return(current_sample)
+  }
 }
 
 #' Checks if ID has been observed before in sampleID table
