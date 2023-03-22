@@ -1,4 +1,3 @@
-
 #' Reads in single line sampleID.txt file, applies element_extracts and generates dataframe 
 #'
 #' @param sampleIDpath 

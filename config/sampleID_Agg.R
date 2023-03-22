@@ -1,6 +1,6 @@
 ## Script to aggregate sample ID info
 
-#source('establish_con.R')
+source('establish_con.R')
 #dbDisconnect(con)
 
 
@@ -13,20 +13,26 @@ option_list = list(
 
 opt_parser = OptionParser(option_list=option_list);
 opt = parse_args(opt_parser)
-#sampleID=sample_info_extract(opt$file)
-sampleidnum = sampleID$Nummer
-sampleidpcr= sampleID$`PCR ID`
-#sampleID = dplyr::left_join(sampleID, con_tbl, by = "PCR ID")
+filepath = opt$file
 
+sampleID = sample_info_extract(filepath)
+
+## Assign PathoID from ActList
+sampleID$PatientIDPathowin = assignPathowinID(sampleID$PCR.ID, activitylisttable = ACTLISTTABLE)
 
 
 ### Check if sampleSNP with that PatientID is already present
-sampleID_path = "./inputs/SampleID_table.tsv"
+
+sampleID = sample_info_extract('./inputs/sampleID1.txt')
+sampleID$PatientIDPathowin = assignPathowinID(sampleID$PCR.ID, activitylisttable = acttable)
+
+
+sampleID_table_path = "./inputs/SampleID_table.tsv"
 # sampleID_path = "/mnt/NGS_Diagnostik/sample_ID/SampleID_table.tsv"
 
 idtable = readr::read_tsv(sampleID_path)
 idtable = dplyr::distinct(idtable)
-
+idtable$PatientIDPathowin = as.character(idtable$PatientIDPathowin)
 
 
 
@@ -36,5 +42,3 @@ if(file.exists(sampleID_path)){
 }else{
   readr::write_tsv(sampleID, sampleID_path, append = TRUE, col_names = TRUE)
 }
-
-

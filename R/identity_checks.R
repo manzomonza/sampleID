@@ -1,5 +1,3 @@
-## identity check
-
 #' Checks if SNP has been observed before and returns sampleID table entry or entries that match.
 #'
 #' @param current_sample 
@@ -9,24 +7,9 @@
 #' @export
 #'
 #' @examples
-snp_check = function(current_sample, idtable){
-  current_sample$reference = 'current library'
-  current_sample = dplyr::relocate(current_sample, orig, .after = last_col())
-  if(current_sample$sample_SNP == "N/A"){
-    return(current_sample)
-  }
-  snp_seen_before =  current_sample$sample_SNP %in% idtable$sample_SNP
-  
-  if(snp_seen_before){
-    snp_and_ID = subset(idtable, sample_SNP == current_sample$sample_SNP)
-    snp_and_ID = dplyr::rename(snp_and_ID, PCR.ID = `PCR ID`)
-    snp_and_ID$reference = 'in database'
-    snp_and_ID = dplyr::relocate(snp_and_ID, orig, .after = last_col())
-    snp_and_ID = dplyr::bind_rows(current_sample, snp_and_ID)
-    return(snp_and_ID)
-  }else{
-    return(current_sample)
-  }
+snp_check = function(sample_SNP, idtable){
+  snp_seen_before =  sample_SNP %in% idtable$sample_SNP
+  return(snp_seen_before)
 }
 
 #' Checks if ID has been observed before in sampleID table
@@ -38,8 +21,8 @@ snp_check = function(current_sample, idtable){
 #' @export
 #'
 #' @examples
-id_check = function(current_sample, idtable){
-  id_seenbefore = current_sample$PatientIDPathowin %in% idtable$PatientIDPathowin
+id_check = function(PatientIDPathowin, idtable){
+  id_seenbefore = PatientIDPathowin %in% idtable$PatientIDPathowin
   return(id_seenbefore)
 }
 

@@ -7,8 +7,8 @@
 #' @export
 #'
 #' @examples
-assignPathowinID = function(current_PCRID, ACTLISTTABLE){
-  PathowinID = subset(ACTLISTTABLE, `PCR ID` %in% current_PCRID)
+assignPathowinID = function(current_PCRID, activitylisttable){
+  PathowinID = subset(activitylisttable, `PCR ID` %in% current_PCRID)
   PathowinID = as.character(PathowinID$PatientIDPathowin)
   return(PathowinID)
 }
