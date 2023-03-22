@@ -1,10 +1,7 @@
 ## Script to aggregate sample ID info
 
 source('establish_con.R')
-#dbDisconnect(con)
-
-
-#####  Read in file
+#####  filepath
 library(optparse)
 
 option_list = list(
@@ -22,23 +19,18 @@ sampleID = sample_info_extract(sampleID)
 sampleID$PatientIDPathowin = assignPathowinID(sampleID$PCR.ID, activitylisttable = ACTLISTTABLE)
 
 
-### Check if sampleSNP with that PatientID is already present
-
-sampleID = sample_info_extract('./inputs/sampleID1.txt')
-sampleID$PatientIDPathowin = assignPathowinID(sampleID$PCR.ID, activitylisttable = acttable)
-
-
-sampleID_table_path = "./inputs/SampleID_table.tsv"
-# sampleID_path = "/mnt/NGS_Diagnostik/sample_ID/SampleID_table.tsv"
-
-idtable = readr::read_tsv(sampleID_path)
+### ID TABLE
+idtable = readr::read_tsv(SAMPLEIDPATH)
 idtable = dplyr::distinct(idtable)
 idtable$PatientIDPathowin = as.character(idtable$PatientIDPathowin)
 
+## check tables
+df = rowbind_tables(sampleID, idtable)
+write_out_result(df)
 
 # Quickfix
-if(file.exists(sampleID_path)){
-  readr::write_tsv(sampleID, sampleID_path, append = TRUE)
+if(file.exists(SAMPLEIDPATH)){
+  readr::write_tsv(sampleID, SAMPLEIDPATH, append = TRUE)
 }else{
-  readr::write_tsv(sampleID, sampleID_path, append = TRUE, col_names = TRUE)
+  readr::write_tsv(sampleID, SAMPLEIDPATH, append = TRUE, col_names = TRUE)
 }
