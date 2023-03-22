@@ -10,6 +10,8 @@
 #'
 #' @examples
 snp_check = function(current_sample, idtable){
+  current_sample$reference = 'current library'
+  current_sample = dplyr::relocate(current_sample, orig, .after = last_col())
   if(current_sample$sample_SNP == "N/A"){
     return(current_sample)
   }
@@ -19,9 +21,8 @@ snp_check = function(current_sample, idtable){
     snp_and_ID = subset(idtable, sample_SNP == current_sample$sample_SNP)
     snp_and_ID = dplyr::rename(snp_and_ID, PCR.ID = `PCR ID`)
     snp_and_ID$reference = 'in database'
-    current_sample$reference = 'new sample'
-    snp_and_ID = dplyr::bind_rows(current_sample, snp_and_ID)
     snp_and_ID = dplyr::relocate(snp_and_ID, orig, .after = last_col())
+    snp_and_ID = dplyr::bind_rows(current_sample, snp_and_ID)
     return(snp_and_ID)
   }else{
     return(current_sample)

@@ -30,9 +30,12 @@ sample_info_extract = function(sampleIDpath){
 #' @examples
 element_extracts = function(origstring){
   snp = stringr::str_extract(origstring, pattern ='(?<=: ).*')
-  nummer = stringr::str_extract(origstring, pattern ='[A-Z]\\d{1,4}\\.\\d{1,5}')
-  id = stringr::str_extract(origstring, pattern ='[A-Z]+\\d{1,5}')
+  nummer = stringr::str_extract(origstring, pattern ='[A-Z]\\d{2,4}\\.\\d{1,5}')
+  id = stringr::str_extract(origstring, pattern ='^[A-Z]+\\d{1,5}')
   return(list(snp = snp,
               id = id,
               nummer = nummer))
 }
+
+
+
