@@ -1,6 +1,7 @@
-inputs = c('./inputs/sampleID1.txt', './inputs/sampleID2.txt', './inputs/sampleID3.txt')
+inputs = c('W116_B2022.1990_v1 : M-CTRYRSGT',
+           'W1607_B2022.25018_v2 : N/A',
+           'W1683_WH_B2022.26440_v1 : M-?GR?RGAW')
 
-#dplyr::bind_rows(lapply(inputs, sample_info_extract))
 outputs = data.frame(PCR.ID = c("W116","W1607","W1683"),
                      Nummer = c("B2022.1990","B2022.25018","B2022.26440"),
                      sample_SNP = c("M-CTRYRSGT","N/A","M-?GR?RGAW"),

@@ -15,6 +15,4 @@ con_akt_list = function(){
 con = con_akt_list()
 con_tbl = dplyr::tbl(con, "Aktivitaetsbericht_PCR_Tabelle_01")
 con_tbl = dplyr::select(con_tbl, `PCR ID`, Nummer, PatientIDPathowin)
-con_tbl = con_tbl %>%
-  dplyr::filter(Nummer  == sampleidnum & `PCR ID` == sampleidpcr ) %>%
-  dplyr::collect()
+ACTLISTTABLE = dplyr::collect(con_tbl)

@@ -4,7 +4,7 @@ source('establish_con.R')
 #dbDisconnect(con)
 
 
-##### 
+#####  Read in file
 library(optparse)
 
 option_list = list(
@@ -15,7 +15,8 @@ opt_parser = OptionParser(option_list=option_list);
 opt = parse_args(opt_parser)
 filepath = opt$file
 
-sampleID = sample_info_extract(filepath)
+sampleID = readLines(filepath)
+sampleID = sample_info_extract(sampleID)
 
 ## Assign PathoID from ActList
 sampleID$PatientIDPathowin = assignPathowinID(sampleID$PCR.ID, activitylisttable = ACTLISTTABLE)
@@ -33,7 +34,6 @@ sampleID_table_path = "./inputs/SampleID_table.tsv"
 idtable = readr::read_tsv(sampleID_path)
 idtable = dplyr::distinct(idtable)
 idtable$PatientIDPathowin = as.character(idtable$PatientIDPathowin)
-
 
 
 # Quickfix

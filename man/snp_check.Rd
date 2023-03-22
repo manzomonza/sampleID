@@ -4,12 +4,12 @@
 \alias{snp_check}
 \title{Checks if SNP has been observed before and returns sampleID table entry or entries that match.}
 \usage{
-snp_check(current_sample, idtable)
+snp_check(sample_SNP, idtable)
 }
 \arguments{
-\item{current_sample}{}
-
 \item{idtable}{}
+
+\item{current_sample}{}
 }
 \description{
 Checks if SNP has been observed before and returns sampleID table entry or entries that match.

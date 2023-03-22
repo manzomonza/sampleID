@@ -3,12 +3,9 @@ inputs = c("F-TKAYRSRT ","F-TKRYRCRW","F-YKGYRGAA")
 outputs = c(FALSE, TRUE, TRUE)
 
 
-
-sampleID_path = "./inputs/SampleID_table.tsv"
-# sampleID_path = "/mnt/NGS_Diagnostik/sample_ID/SampleID_table.tsv"
-
-idtable = readr::read_tsv(sampleID_path)
-idtable = dplyr::distinct(idtable)
+one = subset(idtable, sample_SNP %in% inputs )
+idtable = data.frame(`PCR ID` = c("W653","W2027","E3175"),
+                     sample_SNP = c("F-TKRYRCRW", "F-TKRYRCRW", "F-YKGYRGAA"))
 
 
 for(i in seq_along(inputs)){

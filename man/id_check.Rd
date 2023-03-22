@@ -4,12 +4,12 @@
 \alias{id_check}
 \title{Checks if ID has been observed before in sampleID table}
 \usage{
-id_check(current_sample, idtable)
+id_check(PatientIDPathowin, idtable)
 }
 \arguments{
-\item{current_sample}{}
-
 \item{idtable}{}
+
+\item{current_sample}{}
 }
 \description{
 Checks if ID has been observed before in sampleID table

@@ -4,7 +4,7 @@
 \alias{sample_info_extract}
 \title{Reads in single line sampleID.txt file, applies element_extracts and generates dataframe}
 \usage{
-sample_info_extract(sampleIDpath)
+sample_info_extract(orig)
 }
 \arguments{
 \item{sampleIDpath}{}

@@ -1,3 +1,12 @@
+#' Considering boolean checks for SNP and ID generates dataframe of entry sampleID and databases entries
+#'
+#' @param current_sample 
+#' @param idtable 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 rowbind_tables = function(current_sample, idtable){
   current_sample$reference = 'current library'
   idtable$reference = 'in database'
@@ -33,12 +42,6 @@ rowbind_tables = function(current_sample, idtable){
       return(current_sample)
     }
 }
-
-sampleID = sample_info_extract('./inputs/sampleID3.txt')
-sampleID$PatientIDPathowin = assignPathowinID(sampleID$PCR.ID, activitylisttable = acttable)
-
-rowbind_tables(sampleID, idtable)
-
 
 
 

@@ -6,8 +6,7 @@
 #' @export
 #'
 #' @examples
-sample_info_extract = function(sampleIDpath){
-  orig = readLines(sampleIDpath)
+sample_info_extract = function(orig){
   if(!identical(orig, character(0))){
     extracts = element_extracts(orig)
     sampledf = data.frame(`PCR ID` = extracts$id,
