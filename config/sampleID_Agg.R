@@ -1,8 +1,9 @@
 ## Script to aggregate sample ID info
-
-source('establish_con.R')
-#####  filepath
 library(optparse)
+library(sampleID)
+source('establish_con.R')
+source('filepaths.R')
+#####  filepath
 
 option_list = list(
   make_option(c("-f", "--file"), type="character", default=NULL,
@@ -26,7 +27,9 @@ idtable$PatientIDPathowin = as.character(idtable$PatientIDPathowin)
 
 ## check tables
 df = rowbind_tables(sampleID, idtable)
-write_out_result(df)
+write_out_result(df, filepath)
+
+sampleID = dplyr::select(sampleID, 1, sample_SNP, Nummer, orig, PatientIDPathowin)
 
 # Quickfix
 if(file.exists(SAMPLEIDPATH)){
